@@ -14,6 +14,17 @@ class main():
     currentIP = utils().get_ipinfo()["YourFuckingIPAddress"]
 
     # CLI Arguments
+    if "--help" in sys.argv:
+        print("""
+List of CLI arguments:
+    --check [IP address]                    Manually check an IP address.
+    --gui                                   Enable GUI mode.
+    --history [optional: page #]            View lookup history.
+    --clear-history                         Clear lookup history.
+
+This program was made by a privacy activist.
+        """)
+
     if "--check" in sys.argv:
         currentIP,ipProxyStatus = utils().forceCheck()
         if "--gui" not in sys.argv:
