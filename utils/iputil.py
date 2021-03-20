@@ -1,4 +1,4 @@
-import json,sys
+import json,sys,re,socket
 
 from utils.history import history 
 
@@ -10,6 +10,12 @@ except:
 
 class utils():
     # Main Utility
+    def isip(self,ipinput):
+        regex = "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$"
+        if re.search(regex, ipinput):
+            return True
+        return False
+
     def get_ipinfo(self):
         # Get IP address in JSON format
         try:
@@ -30,12 +36,20 @@ class utils():
         return "Failed"
     
     def forceCheck(self):
-        index = sys.argv.index("--check")
+        index = sys.argv.index("--check") # Get index position of the check arg
         try:
+            # Try to get the host specified
             self.currentIP = sys.argv[index + 1]
         except:
             print("An IP address is required for \"--check\".")
             exit()
+        isip = self.isip(self.currentIP) # Check if the host is an IP address
+        if isip == True:
+            # If it's an IP address, proceed like normal and supply it to the API
+            status = self.check_isproxy(self.currentIP)
+            return self.currentIP,status
+        # If it's not an IP, get the IP of the domain and supply it to the API
+        self.currentIP = socket.gethostbyname(self.currentIP)
         status = self.check_isproxy(self.currentIP)
         return self.currentIP,status
 
@@ -53,7 +67,7 @@ class utils():
             print("Not a proxy.\nIP: " + currentIP)
         else:
             print("An error occured.")
-    
+
     def defaultCmd(self):
         self.currentIPCheck()
         # Add to history file
