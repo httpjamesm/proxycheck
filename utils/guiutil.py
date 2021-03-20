@@ -1,4 +1,5 @@
 import tkinter as tk
+import settings
 
 class guiutils():
     def createGUI(desiredIP,status):
@@ -19,6 +20,10 @@ class guiutils():
         # Set window title
         window.title("ProxyCheck")
 
-        window.geometry('250x100') 
+        try:
+            window.geometry(settings.configdata["resolution"]) 
+        except:
+            print("[x] Invalid resolution set in settings.json.")
+            exit()
         # Keep the window open
         window.mainloop()
