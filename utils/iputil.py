@@ -1,4 +1,9 @@
-import requests,json,sys
+import json,sys
+
+try:
+    import requests
+except:
+    print("[x] Requests library is missing. Install it using \"pip install requests\"")
 
 class utils():
     # Main Utility
