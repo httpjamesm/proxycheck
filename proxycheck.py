@@ -28,6 +28,12 @@ class main():
         print("Loading GUI...")
         guiutils.createGUI(currentIP,utils().check_isproxy(currentIP))
     
+    if "--clear-history" in sys.argv:
+        history().clearHistory()
+        exit()
+    if "--history" in sys.argv:
+        history().viewHistory()
+        exit()
     # Add the lookup to the history json file
     history().addToHistory(currentIP)
     

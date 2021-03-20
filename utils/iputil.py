@@ -23,7 +23,11 @@ class utils():
     
     def forceCheck(self):
         index = sys.argv.index("--check")
-        self.currentIP = sys.argv[index + 1]
+        try:
+            self.currentIP = sys.argv[index + 1]
+        except:
+            print("An IP address is required for \"--check\".")
+            exit()
         status = self.check_isproxy(self.currentIP)
         return self.currentIP,status
 
