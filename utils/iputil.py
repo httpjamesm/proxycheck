@@ -1,9 +1,12 @@
 import json,sys
 
+from utils.history import history 
+
 try:
     import requests
 except:
     print("[x] Requests library is missing. Install it using \"pip install requests\"")
+    exit()
 
 class utils():
     # Main Utility
@@ -50,3 +53,8 @@ class utils():
             print("Not a proxy.\nIP: " + currentIP)
         else:
             print("An error occured.")
+    
+    def defaultCmd(self):
+        self.currentIPCheck()
+        # Add to history file
+        history().addToHistory(utils().get_ipinfo()["YourFuckingIPAddress"])

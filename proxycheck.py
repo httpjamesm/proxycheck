@@ -7,9 +7,10 @@ from utils.history import history
 class main():
     history().createHistFile()
     if len(sys.argv) == 1:
+        utils().defaultCmd()
+        exit()
+    if len(sys.argv) == 2 and "--incognito" in sys.argv:
         utils().currentIPCheck()
-        # Add to history file
-        history().addToHistory(utils().get_ipinfo()["YourFuckingIPAddress"])
         exit()
     currentIP = utils().get_ipinfo()["YourFuckingIPAddress"]
 
@@ -21,9 +22,11 @@ List of CLI arguments:
     --gui                                   Enable GUI mode.
     --history [optional: page #]            View lookup history.
     --clear-history                         Clear lookup history.
+    --incognito                             Don't save lookup to history.
 
 This program was made by a privacy activist.
         """)
+        exit()
 
     if "--check" in sys.argv:
         currentIP,ipProxyStatus = utils().forceCheck()
@@ -45,6 +48,8 @@ This program was made by a privacy activist.
     if "--history" in sys.argv:
         history().viewHistory()
         exit()
-    # Add the lookup to the history json file
-    history().addToHistory(currentIP)
+
+    if "--incognito" not in sys.argv:
+        # Add the lookup to the history json file
+        history().addToHistory(currentIP)
     

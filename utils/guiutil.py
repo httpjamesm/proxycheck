@@ -3,6 +3,8 @@ try:
     import tkinter.messagebox
 except:
     print("[x] tkinter library is missing. Install it using \"pip install tkinter\" or \"apt install python3-tk\".")
+    exit()
+    
 import json
 
 # Import files
