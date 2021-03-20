@@ -2,6 +2,16 @@
 
 This script checks whether your current IP is one of a proxy. This can be useful to check whether your VPN provider is successfully hiding your IP address.
 
+## Requirements
+
+- Python 3 or higher
+- The following libraries: requests, tkinter
+- An IQ of 5 or higher
+
+## Running
+
+Run proxycheck.py using Python 3.
+
 ## Credit
 
 Thanks to database.red for his wonderful ProxyNet API.
