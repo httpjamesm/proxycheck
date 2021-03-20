@@ -27,14 +27,16 @@ class history():
         }
         self.write_json(emptydict)
     
-    def viewHistory(self):
-        # Get page number by looking at the text right after the --history argument
-        index = sys.argv.index("--history")
-        try:
-            pageNum = sys.argv[index + 1]
-        except:
-            # if no page number was provided, just set it to 1.
-            pageNum = 1
+    def viewHistory(self, pageNum=None):
+        if pageNum == None:
+            # Get page number by looking at the text right after the --history argument
+            index = sys.argv.index("--history")
+            try:
+                pageNum = sys.argv[index + 1]
+            except:
+                # if no page number was provided, just set it to 1.
+                pageNum = 1
+
         # Load the history file
         histfile = open('history.json','r')
         # Load the json from the history file

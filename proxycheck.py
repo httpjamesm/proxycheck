@@ -26,7 +26,7 @@ class main():
             print("IP Address:",currentIP)
     if "--gui" in sys.argv:
         print("Loading GUI...")
-        guiutils.createGUI(currentIP,utils().check_isproxy(currentIP))
+        guiutils().createGUI(currentIP,utils().check_isproxy(currentIP))
     
     if "--clear-history" in sys.argv:
         history().clearHistory()
